@@ -18,7 +18,7 @@
 	<condition property="publish.to.artifactory">
 		<and>
 			<equals arg1="${docker.repo}" arg2="${artifactory.docker.repo}"/>
-			<equals arg1="${env.BRANCH_NAME} arg2="master"/>
+			<equals arg1="${env.BRANCH_NAME}" arg2="master"/>
 		</and>						      
 	</condition>
 
