@@ -53,7 +53,7 @@
 
 	<target name="helm-publish">
 		<echo>Branch name is ${env.BRANCH_NAME}</echo>
-		<echo>Docker repo is ${env.docker.repo}" and art repo is ${env.artifactory.docker.repo}
+		<echo>Docker repo is ${docker.repo}" and art repo is ${artifactory.docker.repo}</echo>
 		<antcall target="helm-publish-artifactory" />
 		<antcall target="helm-publish-ova" />
 	</target>
