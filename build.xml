@@ -52,7 +52,7 @@
 	</target>
 
 	<target name="helm-publish">
-		<echo>Branch name is ${env.BRANCH_NAME}/<echo>
+		<echo>Branch name is ${env.BRANCH_NAME}</echo>
 		<antcall target="helm-publish-artifactory" />
 		<antcall target="helm-publish-ova" />
 	</target>
