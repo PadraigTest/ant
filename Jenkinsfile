@@ -11,6 +11,9 @@ pipeline {
             }
         }
         stage('build and publish') {
+            environment {
+				IS_JENKINS = "true"
+            }
             steps {
                     sh "ant helm-publish"
             }
