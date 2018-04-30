@@ -15,7 +15,7 @@ pipeline {
 				IS_JENKINS = "true"
             }
             steps {
-                    sh "ant helm-publish"
+                    sh "ant helm-publish -verbose"
             }
         }
     }
