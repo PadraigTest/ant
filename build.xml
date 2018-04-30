@@ -16,8 +16,10 @@
 	<property environment="env"/>
 	<!-- Check whether we are publishign to Artifactory (or running OVA) -->
 	<condition property="publish.to.artifactory">
-			<equals arg1="${env.BRANCH_NAME}" arg2="ppppppp"/>
-			<equals arg1="${docker.repo}" arg2="${artifactory.docker.repo}"/>					      
+		<and>
+			<equals arg1="${env.BRANCH_NAME}" arg2="master"/>
+			<equals arg1="${docker.repo}" arg2="${artifactory.docker.repo}"/>
+		</and>
 	</condition>
 
 	<condition property="branch.name" value="${env.BRANCH_NAME}" else="master">
@@ -51,6 +53,7 @@
 
 	<target name="helm-publish">
 		<echo>Branch name is ${env.BRANCH_NAME}</echo>
+		<echo>Docker repo is ${env.docker.repo}" and art repo is ${env.artifactory.docker.repo}
 		<antcall target="helm-publish-artifactory" />
 		<antcall target="helm-publish-ova" />
 	</target>
