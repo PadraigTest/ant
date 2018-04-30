@@ -36,10 +36,6 @@
 		</condition>
 	</fail>
 
-	<target name="build" depends="init">
-		<echo>Building docker image</echo>
-	</target>
-
 	<target name="dist" depends="helm-publish">
 		<echo>Tagging docker image</echo>
 	</target>
