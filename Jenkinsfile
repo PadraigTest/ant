@@ -12,7 +12,7 @@ pipeline {
         }
         stage('build and publish') {
             steps {
-                    sh "ant dist"
+                    sh "ant helm-publish"
             }
         }
     }
