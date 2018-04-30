@@ -5,15 +5,17 @@ pipeline {
 
 
     stages {
-      stage('test') {
-        steps {
-          echo "We have run the tests against ant job"
+        stage('test') {
+            steps {
+                echo "We have run the tests against ant job"
+            }
         }
-      }
-      stage('build and publish') {
-        steps {
-          echo "We have built ant job"
+        stage('build and publish') {
+            steps {
+                withAnt(installation: 'Ant 1.9.2') {
+                    sh "ant dist"
+                }
+            }
         }
-      }
     }
 }
