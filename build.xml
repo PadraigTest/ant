@@ -37,7 +37,7 @@
 	</fail>
 
 	<target name="dist" depends="helm-publish">
-		<echo>Tagging docker image</echo>
+		<echo>Running dist target</echo>
 	</target>
   
 	<target name="helm-publish-artifactory" if="publish.to.artifactory">
