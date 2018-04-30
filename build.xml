@@ -7,7 +7,7 @@
 	</description>
 
 	<property name="dist" location="dist" />
-	<property name="artifactory.docker.repo" value="docker-local.artifactory.com"/>
+	<property name="artifactory.docker.repo" value="test"/>
 
   <condition property="docker.repo" value="${artifactory.docker.repo}" else="bar">
 		<isset property="env.artifactory.docker.repo" />
@@ -52,6 +52,7 @@
 	</target>
 
 	<target name="helm-publish">
+		<echo>Branch name is ${env.BRANCH_NAME}/<echo>
 		<antcall target="helm-publish-artifactory" />
 		<antcall target="helm-publish-ova" />
 	</target>
