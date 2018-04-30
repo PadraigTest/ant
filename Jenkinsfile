@@ -12,9 +12,7 @@ pipeline {
         }
         stage('build and publish') {
             steps {
-                withAnt(installation: 'Ant 1.9.2') {
                     sh "ant dist"
-                }
             }
         }
     }
