@@ -16,11 +16,8 @@
 	<property environment="env"/>
 	<!-- Check whether we are publishign to Artifactory (or running OVA) -->
 	<condition property="publish.to.artifactory">
-		<and>
 			<equals arg1="${env.BRANCH_NAME}" arg2="ppppppp"/>
-			<equals arg1="${docker.repo}" arg2="${artifactory.docker.repo}"/>
-	
-		</and>						      
+			<equals arg1="${docker.repo}" arg2="${artifactory.docker.repo}"/>					      
 	</condition>
 
 	<condition property="branch.name" value="${env.BRANCH_NAME}" else="master">
