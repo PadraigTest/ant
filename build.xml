@@ -9,7 +9,7 @@
 	<property name="dist" location="dist" />
 	<property name="artifactory.docker.repo" value="test"/>
 
-  <condition property="docker.repo" value="${artifactory.docker.repo}" else="bar">
+  <condition property="docker.repo" value="${artifactory.docker.repo}" else="${artifactory.docker.repo}">
 		<isset property="env.artifactory.docker.repo" />
 	</condition>
   
