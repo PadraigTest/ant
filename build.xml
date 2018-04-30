@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="anttest" default="build" basedir=".">
+
+	<description>
+		Test ant
+	</description>
+
+	<property name="dist" location="dist" />
+	<property name="artifactory.docker.repo" value="docker-local.artifactory.com"/>
+
+  <condition property="docker.repo" value="${artifactory.docker.repo}" else="bar">
+		<isset property="env.artifactory.docker.repo" />
+	</condition>
+  
+	<property environment="env"/>
+	<!-- Check whether we are publishign to Artifactory (or running OVA) -->
+	<condition property="publish.to.artifactory">
+		<equals arg1="${docker.repo}" arg2="${artifactory.docker.repo}"/>
+	</condition>
+
+	<condition property="branch.name" value="${env.BRANCH_NAME}" else="master">
+		<isset property="env.BRANCH_NAME"/>
+	</condition>
+	<condition property="target.image.name" value="${docker.repo}/${branch.name}/${ant.project.name}" else="${docker.repo}/${ant.project.name}">
+		<isset property="publish.to.artifactory"/>
+	</condition>
+	<fail message="Only Jenkins should publish to Artifactory!">
+		<condition>
+			<and>
+				<isset property="publish.to.artifactory"/>
+				<not>
+					<isset property="env.IS_JENKINS"/>
+				</not>
+			</and>
+		</condition>
+	</fail>
+
+	<target name="build" depends="init">
+		<echo>Building docker image</echo>
+	</target>
+
+	<target name="dist" depends="helm-publish">
+		<echo>Tagging docker image</echo>
+	</target>
+  
+	<target name="helm-publish-artifactory" if="publish.to.artifactory">
+		<echo>Uploading Helm Chart to Artifactory</echo>
+	</target>
+
+	<target name="helm-publish-ova" unless="publish.to.artifactory">
+		<echo>Uploading Helm Chart to OVA</echo>
+	</target>
+
+	<target name="helm-publish">
+		<antcall target="helm-publish-artifactory" />
+		<antcall target="helm-publish-ova" />
+	</target>
+
+	<target name="clean">
+	</target>
+	
+</project>
