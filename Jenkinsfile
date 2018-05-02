@@ -17,13 +17,13 @@ pipeline {
             steps {
                     //sh "ant helm-publish"
 		    						 script {
-                       if (branch_name.contains("pr")) {
-								 echo "PR: this iss branch ${branch_name}"
-								 } else {
-									 echo "MASTER: this is branch ${branch_name}"
-								 }
-						}
-            }
+                       if (branch_name.matches("^PR-\\d*")) {
+                         echo "PR: this is a pull request with branch name: ${branch_name}"
+                         } else {
+                           echo "MASTER: this is branch ${branch_name}"
+                         }
+                       }
+                  }
         }
     }
 }
