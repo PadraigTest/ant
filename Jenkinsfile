@@ -15,7 +15,15 @@ pipeline {
 				IS_JENKINS = "true"
             }
             steps {
-                    sh "ant helm-publish"
+                    //sh "ant helm-publish"
+		    						 script {
+
+							 if (branch_name.contains("pr")) {
+								 echo "PR: this is branch ${branch_name}"
+								 } else {
+									 echo "MASTER: this is branch ${branch_name}"
+								 }
+						}
             }
         }
     }
